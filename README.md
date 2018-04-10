@@ -11,11 +11,14 @@ The website will have the following specifications, with their user stories:
 ```
 As a user
 So that I can visit my regular websites
-I want to be able to see a list of bookmarks
+I want to be able to see a list of all my bookmarks
 ```
 
 * Add new bookmarks
 ```
+As a user
+So that I can save a website
+I want to be able to add it to my bookmarks
 ```
 
 * Delete bookmarks
