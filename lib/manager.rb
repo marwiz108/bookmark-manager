@@ -17,4 +17,8 @@ class Manager
     @con.exec_params("INSERT INTO bookmarks (url) VALUES ($1)", [new])
   end
 
+  # def self.url_valid?
+  #
+  # end
+
 end

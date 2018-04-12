@@ -1,5 +1,7 @@
 <label for="new_url">Enter url:</label>
-<form action="/bookmarks/new" method="post">
+<form action="/bookmarks/newurl" method="post">
   <input type="text" id="new_url" name="new_bookmark">
   <input type="submit" value="Add">
 </form>
+
+<span><%=flash[:notice]%></span>

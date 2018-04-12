@@ -1,5 +1,6 @@
 require 'sinatra/base'
 require 'sinatra/flash'
+require 'uri'
 require './lib/manager'
 
 class BookmarkManager < Sinatra::Base
@@ -7,7 +8,6 @@ class BookmarkManager < Sinatra::Base
   enable :sessions
 
   get "/bookmarks" do
-    p ENV
     @bookmarks = Manager.all
     erb(:index)
   end
@@ -16,9 +16,14 @@ class BookmarkManager < Sinatra::Base
     erb :"bookmarks/new"
   end
 
-  post "/bookmarks/new" do
+  post "/bookmarks/newurl" do
     Manager.all
-    Manager.add(params[:new_bookmark])
+    if params[:new_bookmark] =~ URI::regexp
+      Manager.add(params[:new_bookmark])
+    else
+      flash[:notice] = "Invalid url."
+      redirect "/bookmarks/new"
+    end
     redirect "/bookmarks"
   end
 
