@@ -21,7 +21,7 @@ class BookmarkManager < Sinatra::Base
     if params[:new_bookmark] =~ URI::regexp
       Manager.add(params[:new_bookmark])
     else
-      flash[:notice] = "Invalid url."
+      flash[:error] = "Invalid url."
       redirect "/bookmarks/new"
     end
     redirect "/bookmarks"
