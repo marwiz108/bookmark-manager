@@ -4,12 +4,17 @@ class Manager
 
   def self.all
     if ENV["ENVIRONMENT"] == "test"
-      con = PG.connect(dbname: 'bookmark_manager_test')
+      @con = PG.connect(dbname: 'bookmark_manager_test')
     else
-      con = PG.connect(dbname: 'bookmark_manager')
+      @con = PG.connect(dbname: 'bookmark_manager')
     end
 
-    @bookmarks = con.exec("SELECT * FROM bookmarks;").to_a
-    @bookmarks.map { |row| row['url'] }
+    links = @con.exec("SELECT * FROM bookmarks;")
+    links.map { |row| row['url'] }
   end
+
+  def self.add(new)
+    @con.exec_params("INSERT INTO bookmarks (url) VALUES ($1)", [new])
+  end
+
 end
