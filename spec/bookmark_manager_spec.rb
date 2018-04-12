@@ -1,13 +1,11 @@
 require 'manager'
 require 'pg'
+require_relative './features/fill_helper'
 
 describe Manager do
   describe ".all" do
     it "returns an array of all bookmarks" do
-      con = PG.connect(dbname: 'bookmark_manager_test')
-      con.exec("INSERT INTO bookmarks (url) VALUES ('http://google.com');")
-      con.exec("INSERT INTO bookmarks (url) VALUES ('http://stackoverflow.com');")
-      con.exec("INSERT INTO bookmarks (url) VALUES ('http://youtube.com');")
+      fill_links
 
       bookmarks = Manager.all
       expect(bookmarks).to include("http://google.com")

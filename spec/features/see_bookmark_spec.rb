@@ -1,11 +1,9 @@
 require 'pg'
+require_relative './fill_helper'
 
 feature "Viewing bookmarks" do
   scenario "User can view all the bookmarks" do
-    con = PG.connect(dbname: 'bookmark_manager_test')
-    con.exec("INSERT INTO bookmarks (url) VALUES ('http://google.com');")
-    con.exec("INSERT INTO bookmarks (url) VALUES ('http://stackoverflow.com');")
-    con.exec("INSERT INTO bookmarks (url) VALUES ('http://youtube.com');")
+    fill_links
 
     visit "/"
 
