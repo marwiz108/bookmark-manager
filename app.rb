@@ -1,7 +1,11 @@
 require 'sinatra/base'
+require 'sinatra/flash'
 require './lib/manager'
 
 class BookmarkManager < Sinatra::Base
+  register Sinatra::Flash
+  enable :sessions
+
   get "/bookmarks" do
     p ENV
     @bookmarks = Manager.all
