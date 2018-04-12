@@ -8,7 +8,6 @@ class Manager
     else
       @con = PG.connect(dbname: 'bookmark_manager')
     end
-
     links = @con.exec("SELECT * FROM bookmarks;")
     links.map { |row| row['url'] }
   end
@@ -16,9 +15,5 @@ class Manager
   def self.add(new)
     @con.exec_params("INSERT INTO bookmarks (url) VALUES ($1)", [new])
   end
-
-  # def self.url_valid?
-  #
-  # end
 
 end
