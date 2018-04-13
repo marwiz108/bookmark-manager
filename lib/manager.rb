@@ -13,7 +13,7 @@ class Manager
   end
 
   def self.add(new)
-    @con.exec_params("INSERT INTO bookmarks (url) VALUES ($1)", [new])
+    @con.exec("INSERT INTO bookmarks (url) VALUES ($1)", [new])
   end
 
 end
