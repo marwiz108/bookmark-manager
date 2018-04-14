@@ -1,4 +1,5 @@
 require 'pg'
+require_relative './bookmark'
 
 class Manager
 
@@ -9,7 +10,7 @@ class Manager
       @con = PG.connect(dbname: 'bookmark_manager')
     end
     links = @con.exec("SELECT * FROM bookmarks;")
-    links.map { |row| row['url'] }
+    links.map { |row| Bookmark.new(row ['id'], row['url']) }
   end
 
   def self.add(new)
